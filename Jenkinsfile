@@ -6,7 +6,7 @@ pipeline {
       agent {docker{ image 'openjdk:18-jdk-alpine'}}
        steps{
            sh 'uname -r'
-           sh 'lsblk'
+           sh 'pwd'
            sh  'free -m'
            sh 'df'
        }   
