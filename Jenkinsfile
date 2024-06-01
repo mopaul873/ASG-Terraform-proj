@@ -9,7 +9,9 @@ pipeline {
            sh 'pwd'
            sh  'free -m'
            sh 'df'
-           sh 'docker images'
+           sh 'nproc'
+           sh 'cat /etc/os-release'
+           
        }   
     }
       
