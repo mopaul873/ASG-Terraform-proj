@@ -1,14 +1,22 @@
 pipeline {
   agent any
-   
-   stages{
+
+  stages{
     stage('test1'){
-       agent {docker{ image 'openjdk:18-jdk-alpine'}} 
-        steps{
-            sh "cat /etc/os-release"
-        } 
-     }
-   }
+      agent {docker{ image 'openjdk:18-jdk-alpine'}}
+       steps{
+           sh 'uname -r'
+       }   
+    }
+      
+  }
 }
+  
+   
+  
+   
+    
+   
+
    
 
