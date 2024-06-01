@@ -1,5 +1,5 @@
 
-resource "aws_instance" "webserver1" {
+resource "aws_instance" "webserver10" {
   ami                    = "ami-0651a24cc46a968a0"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg1.id]
@@ -12,7 +12,7 @@ resource "aws_instance" "webserver1" {
 
 }
 
-resource "aws_instance" "webserver2" {
+resource "aws_instance" "webserver20" {
   ami                    = "ami-0651a24cc46a968a0"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg1.id]
