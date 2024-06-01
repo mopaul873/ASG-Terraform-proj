@@ -19,44 +19,56 @@ resource "aws_lb_target_group" "alb-target-group" {
   vpc_id   = aws_vpc.myvpc.id
 
   health_check {
-    enabled = true
-    healthy_threshold = 3
-    interval = 10
-    matcher = 200
-    path = "/"
-    port = "traffic-port"
-    protocol = "http"
-    timeout = 6
+    enabled             = true
+    healthy_threshold   = 3
+    interval            = 10
+    matcher             = 200
+    path                = "/"
+    port                = "traffic-port"
+    protocol            = "http"
+    timeout             = 6
     unhealthy_threshold = 3
   }
 
 }
 
 resource "aws_lb_target_group_attachment" "attach-server1" {
-    target_group_arn = aws_lb_target_group.alb-target-group.arn
-    target_id = aws_instance.webserver1.id
-    port = 80
-  
+  target_group_arn = aws_lb_target_group.alb-target-group.arn
+  target_id        = aws_instance.webserver1.id
+  port             = 80
+
 }
 
 resource "aws_lb_target_group_attachment" "attach-server2" {
-    target_group_arn = aws_lb_target_group.alb-target-group.arn
-    target_id = aws_instance.webserver2.id
-    port = 80
-  
+  target_group_arn = aws_lb_target_group.alb-target-group.arn
+  target_id        = aws_instance.webserver2.id
+  port             = 80
+
 }
 
 resource "aws_lb_listener" "alb-http-listener" {
-    load_balancer_arn = aws_lb.application-lb.arn
-    port = 80
-    protocol = "http"
+  load_balancer_arn = aws_lb.application-lb.arn
+  port              = 80
+  protocol          = "http"
 
-    default_action {
-      type = "forward"
-      target_group_arn = aws_lb_target_group.alb-target-group.arn
-    }
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alb-target-group.arn
+  }
+
+}
+
+resource "aws_eip" "eip" {
   
 }
+
+resource "aws_nat_gateway" "natgw"{
+    allocation_id = aws_eip.eip.id
+    subnet_id = aws_subnet.pubsubaz1.id
+
+}
+ 
+  
 
 
 
