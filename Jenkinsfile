@@ -9,6 +9,7 @@ pipeline {
            sh 'pwd'
            sh  'free -m'
            sh 'df'
+           sh 'docker images'
        }   
     }
       
